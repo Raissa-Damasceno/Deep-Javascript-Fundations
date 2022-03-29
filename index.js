@@ -6,35 +6,24 @@
 const plusPlus = (x) => {
     let orig_x_coerced = Number(x)
     x = orig_x_coerced + 1
-    console.log(x) 
+    return x
 }
 
 plusPlus("1.1")
 
 // Primitive Types 
 
-var v;
-console.log(typeof v); // undefined
-var v = "1";
-console.log(typeof v); // String
-v = 1;
-console.log(typeof v); // Number
-v = true;
-console.log(typeof v); // Boolean
-v = {};
-console.log(typeof v); // Object
-v = Symbol();  
-console.log(typeof v); // Symbol
-v = null;
-console.log(typeof v); // Object
-v = function(){};
-console.log(typeof v); // Function
-v = [1,2,3];
-console.log(typeof v); // Object
-v = 42n;    
-console.log(typeof v);  // bigint
-v = plusPlus("I expect NaN as primitive type");    
-console.log(typeof v);  // NaN
+var v;  // undefined
+var v = "1";  // String
+v = 1;  // Number
+v = true;  // Boolean
+v = {};  // Object
+v = Symbol();  // Symbol
+v = null;  // Object
+v = function(){};  // Function
+v = [1,2,3];  // Object
+v = 42n;  // bigint
+v = plusPlus("I expect NaN as primitive type");    // NaN
 
 // other types 
 
@@ -42,5 +31,38 @@ console.log(typeof v);  // NaN
 // undeclare: When you never declare this variable.
 // uninitialized: When you never initialize this variable (TDZ error)
 
+var myAge = Number("0o46"); // 38 
+var myNextAge = Number("39");  // 39
+var myCatsAge = Number("n/a"); // NaN
+myAge - "my son's age"; // NaN
 
+// myCatsAge === myCatsAge; // false 
+// in this case NaN === NaN is going to be false, because NaN doesn't have a identity property (they are not equal to itself)
+
+isNaN(myAge); // false
+isNaN(myCatsAge); // true
+isNaN("my son's age"); // true 
+
+Number.isNaN(myCatsAge); // true
+Number.isNaN("my son's age"); // false   
+
+Math.sign(-3); // -1
+Math.sign(3); // 1
+Math.sign(-0); // -0
+Math.sign(0); // 0
+
+// "fix" Math.sign(..)
+const sign = (v) => {
+    return v != 0 ? Math.sign(v) : " " ? -1 : 1
+}
+
+const formatTrend = (trendRate) => {
+    let direction = (trendRate < 0 || Object.is(trendRate, -0)) ? "↓" : "↑"
+    return v != 0 ? Math.sign(v) : " " ? -1 : 1
+}
+
+formatTrend(-3); // "↓ 3"
+formatTrend(3); // "↑ 3"
+formatTrend(-0); // "↓ 0"
+formatTrend(0); // "↑ 0"
 
